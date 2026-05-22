@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lista de componentes electrónicos utilizados en el proyecto RF: capacitores, antenas, resistencias, amplificador LF353, transistores BJT 2N2222, módulo MAX9814 y parlante." />
+  <title>Proyecto de Electrónica en RF – Lista de Materiales</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0f14;
+      --surface: #13161e;
+      --surface2: #1b1f2b;
+      --border: #252a38;
+      --accent: #00e5a0;
+      --accent2: #00b8ff;
+      --text: #e8eaf0;
+      --muted: #7a8099;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 1rem;
+      background: var(--accent);
+      color: #000;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      z-index: 999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    header { margin-bottom: 2rem; animation: fadeUp 0.6s ease both; }
+
+    .tag {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(0,229,160,0.25);
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 1.2rem;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 5.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+
+    h1 span { color: var(--accent); }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 480px;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent) 0%, transparent 60%);
+      margin: 2rem 0;
+      opacity: 0.3;
+    }
+
+    .pcb-section {
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.5s 0.1s ease both;
+    }
+
+    .pcb-section h2 {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .pcb-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .pcb-img-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: border-color 0.2s;
+    }
+
+    .pcb-img-wrap:hover { border-color: rgba(0,229,160,0.35); }
+
+    .pcb-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .pcb-caption {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      padding: 8px;
+    }
+
+    .components-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .component-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: border-color 0.2s, background 0.2s;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .component-card:hover { border-color: rgba(0,229,160,0.35); background: var(--surface2); }
+
+    .component-card:nth-child(1) { animation-delay: 0.15s; }
+    .component-card:nth-child(2) { animation-delay: 0.2s; }
+    .component-card:nth-child(3) { animation-delay: 0.25s; }
+    .component-card:nth-child(4) { animation-delay: 0.3s; }
+    .component-card:nth-child(5) { animation-delay: 0.35s; }
+    .component-card:nth-child(6) { animation-delay: 0.4s; }
+    .component-card:nth-child(7) { animation-delay: 0.45s; }
+
+    .card-icon {
+      width: 42px; height: 42px; flex-shrink: 0;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .icon-green  { background: rgba(0,229,160,0.1); }
+    .icon-blue   { background: rgba(0,184,255,0.1); }
+    .icon-amber  { background: rgba(255,185,0,0.1); }
+    .icon-coral  { background: rgba(255,100,80,0.1); }
+    .icon-purple { background: rgba(160,100,255,0.1); }
+
+    .card-body { flex: 1; min-width: 0; }
+    .card-name { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .card-detail { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .card-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; padding: 3px 10px;
+      border-radius: 100px; font-weight: 500; flex-shrink: 0;
+    }
+    .badge-green  { background: rgba(0,229,160,0.12);  color: #00e5a0; }
+    .badge-blue   { background: rgba(0,184,255,0.12);  color: #00b8ff; }
+    .badge-amber  { background: rgba(255,185,0,0.12);   color: #ffb900; }
+    .badge-coral  { background: rgba(255,100,80,0.12);  color: #ff6450; }
+    .badge-purple { background: rgba(160,100,255,0.12); color: #a064ff; }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      animation: fadeUp 0.6s 0.65s ease both;
+    }
+
+    .footer-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      main { padding: 2rem 1rem 3rem; }
+      .card-badge { display: none; }
+      .pcb-gallery { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#componentes" class="skip-link">Ir al contenido principal</a>
+
+  <main>
+    <header>
+      <div class="tag" aria-label="Categoría: RF">📡 Radiofrecuencia</div>
+      <h1>Proyecto de Electrónica en <span>RF</span></h1>
+      <p class="subtitle">Lista de materiales utilizados en el desarrollo del proyecto. Consulta los componentes en cualquier momento.</p>
+    </header>
+
+    <div class="divider" role="separator" aria-hidden="true"></div>
+
+    <section class="pcb-section" aria-label="Visualización 3D de la PCB">
+      <h2>Diseño de la PCB — Receptor y Transmisor</h2>
+      <div class="pcb-gallery">
+        <figure class="pcb-img-wrap">
+          <img src="receptor.jpg" alt="Vista del circuito impreso del Receptor" />
+          <figcaption class="pcb-caption">Módulo Receptor</figcaption>
+        </figure>
+        <figure class="pcb-img-wrap">
+          <img src="transmisor.jpg" alt="Vista del circuito impreso del Transmisor" />
+          <figcaption class="pcb-caption">Módulo Transmisor</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="componentes" aria-label="Lista de componentes">
+      <div class="components-grid">
+        <div class="component-card">
+          <div class="card-icon icon-green">🔋</div>
+          <div class="card-body">
+            <div class="card-name">Capacitores Electrolíticos</div>
+            <div class="card-detail">10µF, 100µF / Filtro de ruido</div>
+          </div>
+          <div class="card-badge badge-green">x4</div>
+        </div>
+
+        <div class="component-card">
+          <div class="card-icon icon-blue">📡</div>
+          <div class="card-body">
+            <div class="card-name">Antena Telescópica RF</div>
+            <div class="card-detail">Sintonizada para frecuencia de trabajo</div>
+          </div>
+          <div class="card-badge badge-blue">x2</div>
+        </div>
+
+        <div class="component-card">
+          <div class="card-icon icon-amber">⚡</div>
+          <div class="card-body">
+            <div class="card-name">Resistencias de Carbón</div>
+            <div class="card-detail">Valores varios / 1/4W</div>
+          </div>
+          <div class="card-badge badge-amber">vias</div>
+        </div>
+
+        <div class="component-card">
+          <div class="card-icon icon-coral">集成</div>
+          <div class="card-body">
+            <div class="card-name">Amplificador LF353</div>
+            <div class="card-detail">Op-Amp de alta velocidad dual</div>
+          </div>
+          <div class="card-badge badge-coral">x1</div>
+        </div>
+
+        <div class="component-card">
+          <div class="card-icon icon-purple">⏳</div>
+          <div class="card-body">
+            <div class="card-name">Transistores BJT 2N2222</div>
+            <div class="card-detail">Amplificación de señal NPN</div>
+          </div>
+          <div class="card-badge badge-purple">x3</div>
+        </div>
+
+        <div class="component-card">
+          <div class="card-icon icon-green">🎙️</div>
+          <div class="card-body">
+            <div class="card-name">Módulo MAX9814</div>
+            <div class="card-detail">Amplificador de micrófono con AGC</div>
+          </div>
+          <div class="card-badge badge-green">x1</div>
+        </div>
+
+        <div class="component-card">
+          <div class="card-icon icon-blue">🔊</div>
+          <div class="card-body">
+            <div class="card-name">Parlante Miniatura</div>
+            <div class="card-detail">8 Ohms / 0.5W</div>
+          </div>
+          <div class="card-badge badge-blue">x1</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p class="footer-label">Proyecto RF — Lista de Materiales</p>
+    </footer>
+  </main>
+</body>
+</html>
